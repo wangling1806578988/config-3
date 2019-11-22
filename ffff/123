@@ -1,2 +1,95 @@
-123321231
-99999999999999999
+
+eureka:
+	注册中心
+	默认30秒一次心跳
+	保护模式
+	客户端每三十秒拉去一次新的注册数据
+	eureka保护模式,可用性
+		AP
+	zookeeper 剔除不可以用的服务,保证一致性
+		CP
+		
+ribbon
+	
+hystrix
+
+hystrix-dashboard:
+	仪表盘,数据监控
+feign
+	ribbon和hystrix集成
+	声明式客户端
+	@FeignClient(name=服务id,fallback=XxxFB.class)//fallback指定降级类,需事先此接口
+	interface A {
+		@GetMapping("/xxxx")
+		JsonResult f(@RequestParameter String name);
+	}
+	
+	feign+rebbon
+		已经默认启用负载均衡和重试
+		ConectTimeout
+		ReadTimeout
+		MaxAutoRetries
+		MaxAutoRetriisNextServer
+	feign+hystrix
+		启用hystrix
+			feign.hystrix.enabled=true
+			添加完整的hystrix依赖
+			
+	zuul
+		API网关
+		提供统一的调用入口
+		路由规则
+			zuul.routes
+			
+			item-service: /item-service/***
+			
+		zuul+ribbon
+			默认启用负载均衡
+			需要手动开启重试
+				zuul.retryable=true
+				添加spring-retry 依赖
+				
+		zuul+hystrix
+			降级
+				实现FallbackProvider 接口
+		zuul过滤板器
+			实现ZuulFielter
+			
+			
+		zuul和feign
+			feign需要在具体的业务中使用,调用其他微服务
+			zuul在最前面,作为统一入口
+			
+	config 
+		配置中心
+		集中维护配置文件
+			git
+			本地文件
+			数据库
+	
+Spring cloud Bus
+	消息总线
+	RabbitMQ
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	
